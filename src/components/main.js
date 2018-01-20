@@ -5,27 +5,27 @@ import * as Auth from '../action/firebase';
 import RootNavigation from '../navigations';
 import Login from './Login';
 
- class Main extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <RootNavigation />
-            </View>
-        )
-    }
+class Main extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <RootNavigation />
+      </View>
+    )
+  }
 }
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#2B2836',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#2B2836',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-
 const mapDispatchToProps = {
-    signInWithGithub: Auth.signInWithGithub,
+  signInWithGithub: Auth.signInWithGithub
 }
 
 export default connect(null, mapDispatchToProps)(Main)

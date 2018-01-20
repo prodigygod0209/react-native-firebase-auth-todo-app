@@ -9,6 +9,18 @@ function authenticate(email,password) {
     }
 }
 
+export const signUp = (email, password) => {
+    return dispatch => {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode == 'auth/email-already-in-use') {
+                console.log('The password is too weak.');
+            }
+        });
+    }
+}
+
 export function signIn(email, password){
     return dispatch => {
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -29,7 +41,7 @@ export function signIn(email, password){
     }
 }
 
-export function signInSuccess(info){
+const signInSuccess = (info) => {
   return {
     type: SIGN_IN_SUCCESS,
     info

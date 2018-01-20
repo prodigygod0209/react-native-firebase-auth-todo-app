@@ -18,7 +18,6 @@ const LoginForm = (props) => {
                 placeholderTextColor="#fff"
                 secureTextEntry={props.secure}
             />
-
         </InputBox>
     )
 }
@@ -39,4 +38,4 @@ const Input = styled.TextInput`
     color: #fff;
     padding-left: 10px;
 `
-export default LoginForm
+export default LoginForm;

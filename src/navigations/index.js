@@ -4,28 +4,28 @@ import Login from '../components/Login';
 import Todo from '../components/Todo';
 
 const RootNavigation = StackNavigator({
-    Main:{
-        screen: Todo
-    },
-    Login: {
-        screen: Login
-    },
-    SignUp: {
-        screen: SignUp
-    }
+  Main:{
+    screen: Todo
+  },
+  Login: {
+    screen: Login
+  },
+  SignUp: {
+    screen: SignUp
+  }
 },
 {   
-    transitionConfig: () => ({
-        transitionSpec: {
-            duration: 0,
-        },
-    }),
-    navigationOptions: {
-        headerStyle:{
-            backgroundColor: '#2B2836',
-        }
+  transitionConfig: () => ({
+    transitionSpec: {
+      duration: 0,
     },
-    initialRouteName: 'Login'
+  }),
+  navigationOptions: {
+    headerStyle:{
+      backgroundColor: '#2B2836',
+    }
+  },
+  initialRouteName: 'Login'
 }
 );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import styled from 'styled-components/native';
-
+import { connect } from 'react-redux';
 
 const FormWrap = styled.View`
     width: 80%;
@@ -28,4 +28,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+
 export default Todo;
