@@ -10,6 +10,8 @@ import { signIn, signInSuccess} from '../../action/firebase';
 class Login extends React.Component {
   constructor(props) {
     super(props)
+    this.getEmail = this.getEmail.bind(this);
+    this.getPassword = this.getPassword.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -18,11 +20,24 @@ class Login extends React.Component {
     }
   }
 
+  getEmail(value) {
+    this.setState({
+      account: value
+    })
+  }
+
+  getPassword(value) {
+    this.setState({
+      password: value
+    })
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
-        <LoginForm placeholder="Email" Icon="user-o" />
-        <LoginForm secure={true} placeholder="Password" Icon="lock" />
+        <LoginForm placeholder="Email" Icon="user-o" getdata={this.getEmail} />
+        <LoginForm secure={true} placeholder="Password" Icon="lock" getdata = {this.getPassword}/>
         <View>
           <Button
             large
@@ -32,7 +47,7 @@ class Login extends React.Component {
                 marginTop: 50,
                 width: '100%',
             }}
-            onPress={() => this.props.signIn('prodigygod0209@gmail.com', 'windsky0209')}
+            onPress={() => this.props.signIn(this.state.account, this.state.password)}
           />
           <Button
             large

@@ -11,15 +11,40 @@ import { signUp } from '../../action/firebase';
 const FormWrap = styled.View`
     width: 80%;
 `
-const SignUp = ({ signUp }) => {
+class SignUp extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      account: '',
+      password: '',
+    } 
+      this.getEmail = this.getEmail.bind(this);
+      this.getPassword = this.getPassword.bind(this);
+  }
+
+  getEmail(value){
+      this.setState({
+          account: value
+      })
+  }
+
+  getPassword(value){
+      this.setState({
+          password: value
+      })
+  }
+
+  render(){
+    const { signUp,navigation } = this.props;
     return(
         <View style={styles.container}>
             <FormWrap>
                 <FormLabel>Email</FormLabel>
-                <FormInput />
+                <FormInput  onChangeText={(value) => this.getEmail(value)} />
                 <FormLabel>Password</FormLabel>
-                <FormInput
+                <FormInput id="account"
                     secureTextEntry={true}
+                    onChangeText={(value) => this.getPassword(value)}
                 />
                 <Button
                     large
@@ -28,13 +53,13 @@ const SignUp = ({ signUp }) => {
                     buttonStyle={{
                         marginTop: 20,
                     }}
-                    onPress={() => signUp('prodigygod0209@gmail.com', 'windsky0209')}
+                    onPress={() => signUp(this.state.account, this.state.password, navigation)}
                 />
             </FormWrap>
         </View>
     );
+  }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

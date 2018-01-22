@@ -9,17 +9,16 @@ function authenticate(email,password) {
   }
 }
 
-export const signUp = (email, password) => {
+export const signUp = (email, password, navigation) => {
   return dispatch => {
     firebaseAuth.createUserWithEmailAndPassword(email, password)
-      .then(function(){
-          loginUser = firebaseAuth.currentUser;
-          console.log("登入使用者為", loginUser);
-          firebaseDb.ref('users/' + loginUser.uid).set({
-              email: loginUser.email,
-          }).catch(function (error) {
-              console.error("寫入使用者資訊錯誤", error);
-          });
+      .then(function(response){
+         let info = {
+          uid: response.uid,
+          email: response.email
+        }
+        dispatch(signInSuccess(info))
+        navigation.navigate('Main')
       })      
       .catch(function (error) {
         var errorCode = error.code;
@@ -27,7 +26,7 @@ export const signUp = (email, password) => {
           if (errorCode == 'auth/email-already-in-use') {
             console.log('The password is too weak.');
           }
-        });
+      });
     }
 }
 
@@ -42,10 +41,6 @@ export function signIn(email, password){
         dispatch(signInSuccess(info))
     })
     .catch(function (error) {
-            // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-            // ...
       console.log('fail');
     });
   }
@@ -58,3 +53,6 @@ const signInSuccess = (info) => {
   }
 }
 
+const signOut = () => {
+
+}

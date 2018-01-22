@@ -17,6 +17,7 @@ const LoginForm = (props) => {
                 placeholder={props.placeholder}
                 placeholderTextColor="#fff"
                 secureTextEntry={props.secure}
+                onChangeText = { value => props.getdata(value)}
             />
         </InputBox>
     )
