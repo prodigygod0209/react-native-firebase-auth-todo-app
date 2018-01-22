@@ -5,7 +5,8 @@ import Todo from '../components/Todo';
 
 const RootNavigation = StackNavigator({
   Main:{
-    screen: Todo
+    screen: Todo,
+    title: 'Todo'
   },
   Login: {
     screen: Login

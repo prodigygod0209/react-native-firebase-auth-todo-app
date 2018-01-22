@@ -3,30 +3,30 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
+import ActionButton from '../ActionButton';
 
-const FormWrap = styled.View`
-    width: 80%;
+const Container = styled.View`
+  width: 100%;
+  flex-direction: column;
 `
 class Todo extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>hello World</Text>
-            </View>
-        )
-    }
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <Container style={styles.container}>
+        <ActionButton />
+      </Container>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#2B2836',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#2B2836',
+  },
 });
 
 
