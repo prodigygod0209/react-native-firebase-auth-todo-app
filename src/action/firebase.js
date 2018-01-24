@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { firebaseAuth,firebaseDb } from '../firebase';
-import { SIGN_IN_SUCCESS } from '../constants/ActionTypes';
+import { SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from '../constants/ActionTypes';
 
 function authenticate(email,password) {
   return dispatch => {
@@ -13,7 +13,7 @@ export const signUp = (email, password, navigation) => {
   return dispatch => {
     firebaseAuth.createUserWithEmailAndPassword(email, password)
       .then(function(response){
-         let info = {
+        let info = {
           uid: response.uid,
           email: response.email
         }

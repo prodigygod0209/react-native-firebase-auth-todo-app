@@ -47,7 +47,7 @@ class Login extends React.Component {
                 marginTop: 50,
                 width: '100%',
             }}
-            onPress={() => this.props.signIn(this.state.account, this.state.password)}
+            onPress={() => this.props.signIn('prodigygod0209@gmail.com', 'windsky0209')}
           />
           <Button
             large

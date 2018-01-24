@@ -10,9 +10,11 @@ const Button = styled.View`
   background-color: #1FBBD2;
 `;
 
-const db = firebaseDb.ref().child('list')
+const MainText = styled.Text`
+  text-align: center;
+`
 
-const addItem = () => {
+const addItem = (addTodo) => {
   AlertIOS.prompt(
     'Add New Item',
     null, [{
@@ -22,11 +24,8 @@ const addItem = () => {
       },
       {
         text: 'Add',
-        onPress: (text) => {
-          if (text == '') return
-          firebaseDb.ref('users/' + 'DAr0qJeSpvMizKLaqNRBOo4kEQD3').push().set({
-            content: text,
-          })
+        onPress: text => {
+          addTodo(text)
         }
       },
     ],
@@ -34,20 +33,18 @@ const addItem = () => {
   );
 }
 
-
-const ActionButton = () => {
+const ActionButton = ({ addTodo }) => {
   return (
     <Button 
-      style={styles.action} 
-           
+      style={styles.action}       
     >
       <TouchableHighlight
         underlayColor={constants.actionColor}
         onPress = {
-          () => addItem()
+          () => addItem(addTodo)
         }
     >
-        <Text style={styles.actionText}>Test</Text>
+        <MainText>ADD</MainText>
       </TouchableHighlight>
     </Button>
   );
@@ -55,12 +52,16 @@ const ActionButton = () => {
 
 const styles = StyleSheet.create({
   action: {
+    justifyContent: 'center',
     backgroundColor: '#1FBBD2',
     borderColor: 'transparent',
     borderWidth: 1,
     paddingLeft: 16,
     paddingTop: 14,
     paddingBottom: 16,
+  },
+  actionText: {
+    
   }
 });
 

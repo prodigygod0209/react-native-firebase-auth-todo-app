@@ -4,6 +4,7 @@ import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-nativ
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import ActionButton from '../ActionButton';
+import { addTodoList } from '../../action/todo.js';
 
 const Container = styled.View`
   width: 100%;
@@ -31,7 +32,7 @@ class Todo extends React.Component {
   constructor(props) {
     super(props)
   }
-  render() {
+  render() { 
     return (
       <Container style={styles.container}>
         <Top></Top>
@@ -40,7 +41,7 @@ class Todo extends React.Component {
         </Header>
         <ItemList scrollEventThrottle={16}>
         </ItemList>
-        <ActionButton />
+        <ActionButton addTodo={addTodoList(this.props.uid)}/>
       </Container>
     )
   }
@@ -54,4 +55,14 @@ const styles = StyleSheet.create({
 });
 
 
-export default Todo;
+const mapStateToProps = (state) => {
+  return { 
+    uid: state.info.uid
+  }
+}
+
+const mapDispatchToProps = {
+  addTodoList: addTodoList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todo)
