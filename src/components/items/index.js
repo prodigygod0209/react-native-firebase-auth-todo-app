@@ -38,12 +38,12 @@ export default class Items extends React.Component {
             <Swipeable
                 rightButtons={[
                     <Delete onPress={this.props.delete}>
-                        <Text>Delete</Text>
+                        <Text>DELETE</Text>
                     </Delete>
                 ]}
             >
                 <Item>
-                    <ItemName>test</ItemName>
+                    <ItemName>{this.props.content}</ItemName>
                 </Item>
             </Swipeable>
         );

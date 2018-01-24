@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button, FormLabel, FormInput, FormValidationMessage, ListView, } from 'react-native-elements'
+import { View, Text, StyleSheet, ListView } from 'react-native';
+import { Button, FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import { addTodoList, getTodoList } from '../../action/todo.js';
@@ -34,13 +34,27 @@ const ItemList = styled.ScrollView`
 class Todo extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
+    }
   }
 
   componentDidMount = () => {
     this.props.getTodoList(this.props.uid)
   }
-  
+
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.Todo.items !== nextProps.Todo.items){
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.Todo.items)
+      });
+    }
+  }
+
   render() { 
+    console.log(this.state.dataSource)
     return (
       <Container style={styles.container}>
         <Top></Top>
@@ -48,7 +62,11 @@ class Todo extends React.Component {
           <HeaderTitle>To Do</HeaderTitle>
         </Header>
         <ItemList scrollEventThrottle={16}>
-          <Items />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) => <Items content={rowData.content} id={rowData.key}  />}
+            enableEmptySections={true}
+          />
         </ItemList>
         <ActionButton addTodo={addTodoList(this.props.uid)}/>
       </Container>
@@ -66,7 +84,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return { 
-    uid: state.Auth.info.uid
+    uid: state.Auth.info.uid,
+    Todo: state.Todo
   }
 }
 

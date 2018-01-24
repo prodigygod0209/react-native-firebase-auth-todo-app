@@ -1,4 +1,4 @@
-const Todo = (state = {}, action) => { 
+const Todo = (state = { items: []}, action) => { 
   switch (action.type) {
     case 'GET_TODO_LIST':
       return {
