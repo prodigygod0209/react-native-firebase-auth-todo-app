@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Button, FormLabel, FormInput, FormValidationMessage, ListView, } from 'react-native-elements'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
+import { addTodoList, getTodoList } from '../../action/todo.js';
 import ActionButton from '../ActionButton';
-import { addTodoList } from '../../action/todo.js';
+import Items from '../items';
+
 
 const Container = styled.View`
   width: 100%;
   flex-direction: column;
+  justify-content: center;
 `;
 const Top = styled.View`
   width: 100%;
@@ -25,13 +28,18 @@ const HeaderTitle = styled.Text`
   color: #fff;
 `;
 const ItemList = styled.ScrollView`
-   width: 80%;
+   width: 100%;
    flex: 1;
 `;
 class Todo extends React.Component {
   constructor(props) {
     super(props)
   }
+
+  componentDidMount = () => {
+    this.props.getTodoList(this.props.uid)
+  }
+  
   render() { 
     return (
       <Container style={styles.container}>
@@ -40,6 +48,7 @@ class Todo extends React.Component {
           <HeaderTitle>To Do</HeaderTitle>
         </Header>
         <ItemList scrollEventThrottle={16}>
+          <Items />
         </ItemList>
         <ActionButton addTodo={addTodoList(this.props.uid)}/>
       </Container>
@@ -57,12 +66,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return { 
-    uid: state.info.uid
+    uid: state.Auth.info.uid
   }
 }
 
 const mapDispatchToProps = {
-  addTodoList: addTodoList
+  addTodoList: addTodoList,
+  getTodoList: getTodoList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo)

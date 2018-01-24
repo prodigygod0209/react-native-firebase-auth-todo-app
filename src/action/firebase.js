@@ -12,14 +12,10 @@ function authenticate(email,password) {
 export const signUp = (email, password, navigation) => {
   return dispatch => {
     firebaseAuth.createUserWithEmailAndPassword(email, password)
-      .then(function(response){
-        let info = {
-          uid: response.uid,
-          email: response.email
-        }
-        dispatch(signInSuccess(info))
+      .then(result => {
+        dispatch(signInSuccess(result))
         navigation.navigate('Main')
-      })      
+      })    
       .catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -33,23 +29,18 @@ export const signUp = (email, password, navigation) => {
 export function signIn(email, password){
   return dispatch => {
     firebaseAuth.signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        let info = {
-          uid: response.uid,
-          email: response.email
-        }
-        dispatch(signInSuccess(info))
-    })
-    .catch(function (error) {
-      console.log('fail');
-    });
+      .then(result => dispatch(signInSuccess(result)))
+      .catch(error => console.log(error));
   }
 }
 
-const signInSuccess = (info) => {
+const signInSuccess = (result) => {
   return {
     type: SIGN_IN_SUCCESS,
-    info
+    info:{
+      uid: result.uid,
+      email: result.email
+    }
   }
 }
 

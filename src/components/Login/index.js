@@ -80,7 +80,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isLogin: state.isLogin
+    isLogin: state.Auth.isLogin
   }
 }
 

@@ -10,7 +10,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleWare from 'redux-thunk';
 import { createLogger } from 'redux-logger'
 import Main from './src/components/main';
-import reducer from './src/reducer';
+import rootReducer from './src/reducer';
 import RootNavigation from './src/navigations';
 
 
@@ -23,7 +23,7 @@ function configureStore(initialState) {
       loggerMiddleware
     ),
   );
-  return createStore(reducer, enhancer);
+  return createStore(rootReducer, enhancer);
 }
 
 const store = configureStore({});
