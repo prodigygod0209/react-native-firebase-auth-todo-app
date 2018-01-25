@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ListView } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
-import { addTodoList, getTodoList } from '../../action/todo.js';
+import { addTodoList, getTodoList, deleteData } from '../../action/todo.js';
 import ActionButton from '../ActionButton';
 import Items from '../items';
 
@@ -64,7 +64,13 @@ class Todo extends React.Component {
         <ItemList scrollEventThrottle={16}>
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <Items content={rowData.content} id={rowData.key}  />}
+            renderRow={(rowData) => 
+              <Items 
+                content={rowData.content} 
+                id={rowData.key} 
+                delete={() => {deleteData(this.props.uid,rowData.key)}}
+              />
+            }
             enableEmptySections={true}
           />
         </ItemList>

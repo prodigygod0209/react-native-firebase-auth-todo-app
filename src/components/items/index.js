@@ -33,19 +33,19 @@ const Delete = styled.TouchableOpacity`
 `
 
 export default class Items extends React.Component {
-    render() {
-        return (
-            <Swipeable
-                rightButtons={[
-                    <Delete onPress={this.props.delete}>
-                        <Text>DELETE</Text>
-                    </Delete>
-                ]}
-            >
-                <Item>
-                    <ItemName>{this.props.content}</ItemName>
-                </Item>
-            </Swipeable>
-        );
-    }
+  render() {
+    return (
+      <Swipeable
+        rightButtons={[
+          <Delete onPress={this.props.delete}>
+            <Text>DELETE</Text>
+          </Delete>
+        ]}
+       >
+        <Item>
+          <ItemName>{this.props.content}</ItemName>
+        </Item>
+      </Swipeable>
+    );
+  }
 }

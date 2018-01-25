@@ -22,6 +22,11 @@ export function getTodoList(uid) {
   }
 }
 
+
+export function deleteData(uid,key){
+    firebaseDb.ref('users/' + uid).child(key).remove();
+}
+
 export const addTodoList = (uid) => {
   return text => {
     firebaseDb.ref('users/' + uid).push().set({
