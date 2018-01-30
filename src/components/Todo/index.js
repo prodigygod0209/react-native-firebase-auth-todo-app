@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ListView } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage, } from 'react-native-elements'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
-import { addTodoList, getTodoList, deleteData } from '../../action/todo.js';
+import { addTodoList, getTodoList, deleteData, editTodoList } from '../../action/todo.js';
 import ActionButton from '../ActionButton';
 import Items from '../items';
 
@@ -31,6 +31,7 @@ const ItemList = styled.ScrollView`
    width: 100%;
    flex: 1;
 `;
+
 class Todo extends React.Component {
   constructor(props) {
     super(props)
@@ -68,7 +69,9 @@ class Todo extends React.Component {
               <Items 
                 content={rowData.content} 
                 id={rowData.key} 
+                completed={rowData.completed}
                 delete={() => {deleteData(this.props.uid,rowData.key)}}
+                addTodo={editTodoList(this.props.uid)}
               />
             }
             enableEmptySections={true}
