@@ -23,7 +23,7 @@ export function getTodoList(uid) {
 }
 
 export function deleteData(uid,key){
-    firebaseDb.ref('users/' + uid).child(key).remove()
+    firebaseDb.ref('users/' + uid).child(key).remove();
 }
 
 export const addTodoList = (uid) => {
